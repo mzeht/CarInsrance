@@ -1,5 +1,7 @@
 package com.wpmac.carinsrance.activity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -15,11 +17,14 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.avos.avoscloud.AVUser;
 import com.wpmac.carinsrance.R;
+import com.wpmac.carinsrance.base.BasePreference;
 import com.wpmac.carinsrance.base.CarInsuranceActivity;
+import com.wpmac.carinsrance.debug.L;
 import com.wpmac.carinsrance.fragment.CarinsacneFragment;
 import com.wpmac.carinsrance.fragment.CustomersInfoFragment;
 import com.wpmac.carinsrance.fragment.MaintenanceFragment;
@@ -43,6 +48,9 @@ public class MainActivity extends CarInsuranceActivity {
     private OrdersFragment ordersFragment;
     private CarinsacneFragment carinsacneFragment;
     private MaintenanceFragment maintenanceFragment;
+    private TextView userNameTextView;
+    private View view;
+    public ProgressDialog ProgressDialog;
 
 
     @Override
@@ -77,6 +85,10 @@ public class MainActivity extends CarInsuranceActivity {
                 return false;
             }
         });
+        View headerLayout = navigationView.inflateHeaderView(R.layout.nav_header_main);
+        userNameTextView= (TextView) headerLayout.findViewById(R.id.user_name_textview);
+        L.i(BasePreference.getInstance().getUserName().toString());
+        userNameTextView.setText(BasePreference.getInstance().getUserName().toString());
         AVUser currentUser = AVUser.getCurrentUser();
         if (currentUser != null) {
             userId = currentUser.getObjectId();
@@ -153,6 +165,10 @@ public class MainActivity extends CarInsuranceActivity {
 //                    measFragment = MeasFragment.getInstance();
 //                }
 //                replaceMainFragment(measFragment);
+//                Intent intent=new Intent();
+//                intent.setClass(this,CarInsranceDetailActivity.class);
+//                startActivity(intent);
+
                 break;
             case R.id.nav_setting:
 //                if (actionBar != null) {
@@ -162,6 +178,9 @@ public class MainActivity extends CarInsuranceActivity {
 //                    pointsFragment = PointsFragment.getInstance();
 //                }
 //                replaceMainFragment(pointsFragment);
+                Intent intent = new Intent();
+                intent.setClass(this,SettingsActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

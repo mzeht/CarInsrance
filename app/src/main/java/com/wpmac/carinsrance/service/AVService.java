@@ -17,9 +17,12 @@ import com.avos.avoscloud.RequestPasswordResetCallback;
 import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.SignUpCallback;
 import com.wpmac.carinsrance.activity.LoginActivity;
+import com.wpmac.carinsrance.model.HomebanerList;
 
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -102,4 +105,21 @@ public class AVService {
     doing.put("UserSuggestion", advice);
     doing.saveInBackground(saveCallback);
   }
+
+
+  public static List<HomebanerList> findBanners() {
+    // 查询当前列表
+    AVQuery<HomebanerList> query = AVQuery.getQuery(HomebanerList.class);
+    // 按照更新时间降序排序
+    query.orderByDescending("updatedAt");
+    // 最大返回1000条
+    query.limit(1000);
+    try {
+      return query.find();
+    } catch (AVException exception) {
+      Log.e("tag", "Query todos failed.", exception);
+      return Collections.emptyList();
+    }
+  }
+
 }

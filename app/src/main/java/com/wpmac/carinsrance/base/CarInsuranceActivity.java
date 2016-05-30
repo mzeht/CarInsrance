@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVUser;
 import com.wpmac.carinsrance.R;
+import com.wpmac.carinsrance.manager.AppManager;
 
 /**
  * Created by wpmac on 16/5/23.
@@ -28,6 +29,7 @@ public class CarInsuranceActivity extends AppCompatActivity {
         if (currentUser != null) {
             userId = currentUser.getObjectId();
         }
+        AppManager.getAppManager().addActivity(this);
     }
 
     public String getUserId() {

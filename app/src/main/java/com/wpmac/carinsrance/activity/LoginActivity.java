@@ -15,6 +15,7 @@ import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.wpmac.carinsrance.R;
+import com.wpmac.carinsrance.base.BasePreference;
 import com.wpmac.carinsrance.base.CarInsuranceActivity;
 import com.wpmac.carinsrance.service.AVService;
 
@@ -48,12 +49,22 @@ public class LoginActivity extends CarInsuranceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(BasePreference.getInstance().getIsLogin().equals("ture")){
+
+//                    progressDialogDismiss();
+                    Intent mainIntent = new Intent(activity,
+                            MainActivity.class);
+                    startActivity(mainIntent);
+                    activity.finish();
+
+        }
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         fromActivityName=getIntent().getStringExtra("FromActivityName");
         AVAnalytics.trackAppOpened(getIntent());
         AVService.initPushService(this);
         setListener();
+
     }
 
     private void setListener() {
@@ -84,7 +95,7 @@ public class LoginActivity extends CarInsuranceActivity {
             @Override
             public void onClick(View v) {
 
-                String username = mUserNameEdittext.getText().toString();
+                final String username = mUserNameEdittext.getText().toString();
                 String password = mUserPasswordEdittext.getText().toString();
                 if (username.isEmpty()) {
                     showUserNameEmptyError();
@@ -100,6 +111,8 @@ public class LoginActivity extends CarInsuranceActivity {
                         new LogInCallback() {
                             public void done(AVUser user, AVException e) {
                                 if (user != null) {
+                                    BasePreference.getInstance().saveIsLogin("ture");
+                                    BasePreference.getInstance().saveUserName(username);
                                     mTimer = new Timer();
                                     mTimer.schedule(new TimerTask() {
                                         @Override
@@ -113,6 +126,8 @@ public class LoginActivity extends CarInsuranceActivity {
                                     }, 2000);
 
                                 } else {
+                                    BasePreference.getInstance().saveIsLogin("false");
+                                    BasePreference.getInstance().saveUserName("");
                                     progressDialogDismiss();
                                     showLoginError();
                                 }

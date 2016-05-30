@@ -9,7 +9,7 @@ public class BasePreference extends Preference {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
     //数据库名称
-    private String SP_NAME = "";
+    private String SP_NAME = "CarInsrance";
 
     private static final String MAP_SERVER_URL = "MAP_SERVER_URL";
     private static final String ISLOGIN = "ISLOGIN";
@@ -18,6 +18,7 @@ public class BasePreference extends Preference {
     private static final String ISREGISTER = "ISREGISTER";
     public static final String SING_IN = "SING_IN";
     public static final String OPEN_ID = "OPEN_ID";
+    public static final String USER_NAME = "USER_NAME";
     public static final String ACCESS_TOKEN = "ACCESS_TOKEN";
     private static final String USER_LOG = "";
     private static final String HOT_WORD_STRING = "HOT_WORD_STRING";
@@ -174,6 +175,26 @@ public class BasePreference extends Preference {
     public String getUserId() {
 
         return sp.getString(USER_ID, "");
+    }
+
+    /**
+     * 保存用户userName
+     *
+     * @param username
+     */
+    public void saveUserName(String username) {
+        editor.putString(USER_NAME, username);
+        editor.commit();
+    }
+
+    /**
+     * 获取用户userName
+     *
+     * @param
+     */
+    public String getUserName() {
+
+        return sp.getString(USER_NAME, "");
     }
 
 

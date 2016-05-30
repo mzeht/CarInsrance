@@ -24,7 +24,7 @@
             android:title="@string/nav_orders"/>
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="其它">
         <menu>
 
             <item

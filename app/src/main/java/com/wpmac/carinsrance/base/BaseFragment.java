@@ -40,6 +40,8 @@ public abstract class BaseFragment extends Fragment {
 		injected=true;
 
 		return x.view().inject(this,inflater,container);
+
+
 	}
 
     @Override
