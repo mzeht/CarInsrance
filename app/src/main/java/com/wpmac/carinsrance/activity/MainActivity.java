@@ -26,6 +26,7 @@ import com.wpmac.carinsrance.base.BasePreference;
 import com.wpmac.carinsrance.base.CarInsuranceActivity;
 import com.wpmac.carinsrance.debug.L;
 import com.wpmac.carinsrance.fragment.CarinsacneFragment;
+import com.wpmac.carinsrance.fragment.CartFragment;
 import com.wpmac.carinsrance.fragment.CustomersInfoFragment;
 import com.wpmac.carinsrance.fragment.MaintenanceFragment;
 import com.wpmac.carinsrance.fragment.OrdersFragment;
@@ -48,6 +49,8 @@ public class MainActivity extends CarInsuranceActivity {
     private OrdersFragment ordersFragment;
     private CarinsacneFragment carinsacneFragment;
     private MaintenanceFragment maintenanceFragment;
+//    private PeijianFragment peijianFragment;
+    private CartFragment cartFragment;
     private TextView userNameTextView;
     private View view;
     public ProgressDialog ProgressDialog;
@@ -121,6 +124,27 @@ public class MainActivity extends CarInsuranceActivity {
                 }
                 replaceMainFragment(ShoppingFragment);
                 break;
+            case R.id.nav_caigoupeijian:
+//                if (actionBar != null) {
+//                    actionBar.setTitle("采购配件");
+//                }
+//                if (peijianFragment == null) {
+//                    peijianFragment = PeijianFragment.getInstance();
+//                }
+//                replaceMainFragment(peijianFragment);
+                Intent intent=new Intent();
+                intent.setClass(this,PeiJianActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_mycart:
+                if (actionBar != null) {
+                    actionBar.setTitle("购物车");
+                }
+                if (cartFragment == null) {
+                    cartFragment = CartFragment.getInstance();
+                }
+                replaceMainFragment(cartFragment);
+                break;
             case R.id.nav_mycoustomer:
                 if (actionBar != null) {
                     actionBar.setTitle(R.string.nav_mycoustomer);
@@ -139,24 +163,24 @@ public class MainActivity extends CarInsuranceActivity {
                 }
                 replaceMainFragment(carinsacneFragment);
                 break;
-            case R.id.nav_fixlist:
-                if (actionBar != null) {
-                    actionBar.setTitle(R.string.nav_fixlist);
-                }
-                if (maintenanceFragment == null) {
-                    maintenanceFragment = MaintenanceFragment.getInstance();
-                }
-                replaceMainFragment(maintenanceFragment);
-                break;
-            case R.id.nav_orders:
-                if (actionBar != null) {
-                    actionBar.setTitle(R.string.nav_orders);
-                }
-                if (ordersFragment == null) {
-                    ordersFragment = OrdersFragment.getInstance();
-                }
-                replaceMainFragment(ordersFragment);
-                break;
+//            case R.id.nav_fixlist:
+//                if (actionBar != null) {
+//                    actionBar.setTitle(R.string.nav_fixlist);
+//                }
+//                if (maintenanceFragment == null) {
+//                    maintenanceFragment = MaintenanceFragment.getInstance();
+//                }
+//                replaceMainFragment(maintenanceFragment);
+//                break;
+//            case R.id.nav_orders:
+//                if (actionBar != null) {
+//                    actionBar.setTitle(R.string.nav_orders);
+//                }
+//                if (ordersFragment == null) {
+//                    ordersFragment = OrdersFragment.getInstance();
+//                }
+//                replaceMainFragment(ordersFragment);
+//                break;
             case R.id.nav_about:
 //                if (actionBar != null) {
 //                    actionBar.setTitle(R.string.meas_data);
@@ -166,9 +190,12 @@ public class MainActivity extends CarInsuranceActivity {
 //                }
 //                replaceMainFragment(measFragment);
 //                Intent intent=new Intent();
-//                intent.setClass(this,CarInsranceDetailActivity.class);
+//                intent.setClass(this,PeijianDetailActivity.class);
 //                startActivity(intent);
 
+                intent = new Intent();
+                intent.setClass(this,AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_setting:
 //                if (actionBar != null) {
@@ -178,7 +205,7 @@ public class MainActivity extends CarInsuranceActivity {
 //                    pointsFragment = PointsFragment.getInstance();
 //                }
 //                replaceMainFragment(pointsFragment);
-                Intent intent = new Intent();
+                intent = new Intent();
                 intent.setClass(this,SettingsActivity.class);
                 startActivity(intent);
                 break;
@@ -213,6 +240,7 @@ public class MainActivity extends CarInsuranceActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            BasePreference.getInstance().saveIsLogin("false");
             return true;
         }
 

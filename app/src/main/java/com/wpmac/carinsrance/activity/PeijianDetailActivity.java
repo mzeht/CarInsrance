@@ -4,16 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.wpmac.carinsrance.R;
+import com.wpmac.carinsrance.debug.L;
+
+import butterknife.ButterKnife;
 
 /**
  * An activity representing a single CarInsrance detail screen. This
@@ -21,19 +25,35 @@ import com.wpmac.carinsrance.R;
  * item details are presented side-by-side with a list of items
  * in a {@link CarInsranceListActivity}.
  */
-public class CarInsranceDetailActivity extends AppCompatActivity {
+public class PeijianDetailActivity extends AppCompatActivity {
 
-    public String imageName;
+    public String imageurl;
+    TextView name_tv;
+    TextView pinpai_tv;
+    TextView price_tv;
+    TextView type_tv;
+    TextView description_tv;
+    private String name;
+    private int price;
+    private String pinpai;
+    private String type;
+    private int id;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carinsrance_detail);
-        String imageUrl=getIntent().getStringExtra("imgUrl");
-        imageName=getIntent().getStringExtra("imgName");
-        ImageView imageView= (ImageView) findViewById(R.id.detail_imgview);
-        Picasso.with(getApplicationContext()).load(imageUrl).into(imageView);
+        ButterKnife.bind(this);
+        imageurl = getIntent().getStringExtra("imageurl");
+        name = getIntent().getStringExtra("name");
+        price = getIntent().getIntExtra("price", 0);
+        pinpai = getIntent().getStringExtra("pinpai");
+        type = getIntent().getStringExtra("type");
+        id = getIntent().getIntExtra("id", 0);
+        L.i("intent", imageurl + name + String.valueOf(price) + pinpai + String.valueOf(id));
+        initView();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -41,7 +61,7 @@ public class CarInsranceDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "已加入购物车", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -61,18 +81,33 @@ public class CarInsranceDetailActivity extends AppCompatActivity {
         //
         // http://developer.android.com/guide/components/fragments.html
         //
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putString(CarInsranceDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(CarInsranceDetailFragment.ARG_ITEM_ID));
-            CarInsranceDetailFragment fragment = new CarInsranceDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.carinsrance_detail_container, fragment)
-                    .commit();
-        }
+//        if (savedInstanceState == null) {
+//            // Create the detail fragment and add it to the activity
+//            // using a fragment transaction.
+//            Bundle arguments = new Bundle();
+//            arguments.putString(CarInsranceDetailFragment.ARG_ITEM_ID,
+//                    getIntent().getStringExtra(CarInsranceDetailFragment.ARG_ITEM_ID));
+//            CarInsranceDetailFragment fragment = new CarInsranceDetailFragment();
+//            fragment.setArguments(arguments);
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.carinsrance_detail_container, fragment)
+//                    .commit();
+//        }
+    }
+
+    private void initView() {
+        ImageView imageView = (ImageView) findViewById(R.id.detail_imgview);
+        Picasso.with(getApplicationContext()).load("http://o7twp9p7v.bkt.clouddn.com/image/detailsimple/detailpeijian.jpg").into(imageView);
+        name_tv= (TextView) findViewById(R.id.name);
+        price_tv= (TextView) findViewById(R.id.price);
+        pinpai_tv= (TextView) findViewById(R.id.pinpai);
+        type_tv= (TextView) findViewById(R.id.type);
+        description_tv= (TextView) findViewById(R.id.description);
+        description_tv.setText("【迈氏认证】东风日产骐达新骐达 1.6L 无级变速 (2011-2016)无级变速箱总成");
+        name_tv.setText(pinpai+"的"+type);
+        price_tv.setText(price+"");
+        type_tv.setText(type);
+        pinpai_tv.setText(pinpai);
     }
 
     @Override

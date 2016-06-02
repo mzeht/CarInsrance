@@ -16,7 +16,7 @@ import com.wpmac.carinsrance.activity.dummy.DummyContent;
 /**
  * A fragment representing a single CarInsrance detail screen.
  * This fragment is either contained in a {@link CarInsranceListActivity}
- * in two-pane mode (on tablets) or a {@link CarInsranceDetailActivity}
+ * in two-pane mode (on tablets) or a {@link PeijianDetailActivity}
  * on handsets.
  */
 @SuppressLint("ValidFragment")

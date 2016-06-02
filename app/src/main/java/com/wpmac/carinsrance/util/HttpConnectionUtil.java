@@ -104,9 +104,9 @@ public class HttpConnectionUtil {
 	 * @param params
 	 * @return
 	 */
-	public static String openUrl(String url, String method, Bundle params) {
+	public static String openUrl(String url, String method, Bundle params,String type) {
 		if (method.equals("GET")) {
-			if (params != null) {			
+			if (params != null&&type=="") {
 				url = url + "?" + encodeUrl(params);				
 			}
 		}

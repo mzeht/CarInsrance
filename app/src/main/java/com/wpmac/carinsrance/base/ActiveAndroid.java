@@ -2,6 +2,8 @@ package com.wpmac.carinsrance.base;
 
 import android.app.Application;
 
+import com.wpmac.carinsrance.database.DBManager;
+
 
 public final class ActiveAndroid {
     
@@ -26,7 +28,7 @@ public final class ActiveAndroid {
 		BasePreference.initialize(application);
 		
 		//初始化数据库
-//		DBManager.initialize(application);
+		DBManager.initialize(application);
 		//
 		//DownLoadManager.initialize(application);
 

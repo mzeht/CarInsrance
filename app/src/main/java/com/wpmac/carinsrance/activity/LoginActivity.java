@@ -68,6 +68,13 @@ public class LoginActivity extends CarInsuranceActivity {
     }
 
     private void setListener() {
+        //忘记密码
+        mForgetPasswordTextview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         //随便逛逛
 
         mFinishTextview.setOnClickListener(new View.OnClickListener() {

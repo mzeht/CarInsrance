@@ -119,6 +119,8 @@
     <color name="micro_will_bottom_text_bg">#ffece9</color>
     <color name="color_gray_f8">#f8f8f8</color>
 
+    <color name="suggesed_reading_title_bg">#fda428</color>
+
 
     <color name="green_500">#259b24</color>
     <color name="green_300">#42bd41</color>

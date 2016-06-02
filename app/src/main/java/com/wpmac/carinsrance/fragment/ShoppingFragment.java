@@ -6,18 +6,21 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.wpmac.carinsrance.R;
-import com.wpmac.carinsrance.activity.CarInsranceDetailActivity;
+import com.wpmac.carinsrance.activity.PeiJianActivity;
 import com.wpmac.carinsrance.adapter.HomeCatgoryAdapter;
 import com.wpmac.carinsrance.adapter.decoration.CardViewtemDecortion;
 import com.wpmac.carinsrance.base.BaseFragment;
@@ -39,8 +42,10 @@ import java.util.List;
 public class ShoppingFragment extends BaseFragment {
 
     private static ShoppingFragment shoppingFragment;
+//    private PeijianFragment peijianFragment;
     private SliderLayout mSliderLayout;
     private RecyclerView mRecyclerView;
+    private TextView peijianTextView;
     private View View;
     private volatile List<HomebanerList> bannerList;
     private HomeCardBean homeCardBean;
@@ -110,12 +115,22 @@ public class ShoppingFragment extends BaseFragment {
     protected void findViewById() {
         mSliderLayout = (SliderLayout) View.findViewById(R.id.slider);
         mRecyclerView = (RecyclerView) View.findViewById(R.id.recyclerview);
+        peijianTextView = (TextView) View.findViewById(R.id.peijian_textview);
+
 
 
     }
 
     @Override
     protected void setEventListener() {
+        peijianTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent();
+                intent.setClass(getActivity(),PeiJianActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -207,11 +222,19 @@ public class ShoppingFragment extends BaseFragment {
             public void onClick(View view, HomeCardBean.ResultsBean.CpBean campaign) {
 
 
-                Intent intent = new Intent(getActivity(), CarInsranceDetailActivity.class);
-                intent.putExtra("imgUrl",campaign.getImgUrl());
-                intent.putExtra("imgName",campaign.getTitle());
+                Intent intent = new Intent(getActivity(), PeiJianActivity.class);
+//                intent.putExtra("imgUrl",campaign.getImgUrl());
+//                intent.putExtra("imgName",campaign.getTitle());
 
                 startActivity(intent);
+//                android.app.ActionBar actionBar = getActivity().getActionBar();
+//                if (actionBar != null) {
+//                    actionBar.setTitle("采购配件");
+//                }
+//                if (peijianFragment == null) {
+//                    peijianFragment = PeijianFragment.getInstance();
+//                }
+//                replaceMainFragment(peijianFragment);
 
 
             }
@@ -224,6 +247,18 @@ public class ShoppingFragment extends BaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
 
+    }
+
+    private void replaceMainFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        if (fragment.isAdded()) {
+//            Toast.makeText(getActivity(), "isadded", Toast.LENGTH_SHORT).show();
+
+        } else {
+            manager.beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .commit();
+        }
     }
 
     private void initBanner() {

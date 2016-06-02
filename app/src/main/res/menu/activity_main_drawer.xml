@@ -7,6 +7,14 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/nav_home"/>
         <item
+            android:id="@+id/nav_caigoupeijian"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="采购配件"/>
+        <item
+            android:id="@+id/nav_mycart"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="我的购物车"/>
+        <item
             android:id="@+id/nav_mycoustomer"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_mycoustomer"/>
@@ -14,14 +22,14 @@
             android:id="@+id/nav_mycarinsacne"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/nav_mycarinsacne"/>
-        <item
-            android:id="@+id/nav_fixlist"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/nav_fixlist"/>
-        <item
-            android:id="@+id/nav_orders"
-            android:icon="@drawable/ic_menu_send"
-            android:title="@string/nav_orders"/>
+        <!--<item-->
+            <!--android:id="@+id/nav_fixlist"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="@string/nav_fixlist"/>-->
+        <!--<item-->
+            <!--android:id="@+id/nav_orders"-->
+            <!--android:icon="@drawable/ic_menu_send"-->
+            <!--android:title="@string/nav_orders"/>-->
     </group>
 
     <item android:title="其它">
